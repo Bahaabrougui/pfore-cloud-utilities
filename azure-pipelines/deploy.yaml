@@ -1,0 +1,68 @@
+parameters:
+  - name: pythonVersion
+    type: string
+    default: 3.9
+
+jobs:
+  - job: library_secrets
+    displayName: 'Library - Get secrets from keyvault'
+    workspace:
+      clean: all
+    container: uapc-base
+    steps:
+      - task: AzureCLI@2
+        name: keyvault_secrets
+        inputs:
+          azureSubscription: uapc-sc-arm_$(DeploymentStageShort)-prj-$(PROJECT_ID)
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            set -euo pipefail
+
+            KEYVAULT_NAME=uapc-$(DeploymentStageShort)-prj-$(PROJECT_ID)-kv
+
+            SECRET=$(az keyvault secret show \
+              --name ArtifactoryTechUserName --vault-name $KEYVAULT_NAME --query value --output tsv)
+            echo "##vso[task.setvariable variable=ARTIFACTORY_USER;isOutput=true]${SECRET}"
+            echo "$KEYVAULT_NAME: ArtifactoryTechUserName loaded"
+
+            SECRET=$(az keyvault secret show \
+              --name ArtifactoryTechUserApiKey --vault-name $KEYVAULT_NAME --query value --output tsv)
+            echo "##vso[task.setvariable variable=ARTIFACTORY_API_KEY;isOutput=true;issecret=true]${SECRET}"
+            echo "$KEYVAULT_NAME: ArtifactoryTechUserApiKey loaded"
+        displayName: 'Download keyvault secrets'
+
+  - job: library_deployment
+    dependsOn: library_secrets
+    displayName: 'Library - Deploy'
+    workspace:
+      clean: all
+    variables:
+      - name: ARTIFACTORY_USER
+        value: $[ dependencies.library_secrets.outputs['keyvault_secrets.ARTIFACTORY_USER'] ]
+      - name: ARTIFACTORY_API_KEY
+        value: $[ dependencies.library_secrets.outputs['keyvault_secrets.ARTIFACTORY_API_KEY'] ]
+    container: uapc-base
+    steps:
+      - checkout: self
+        clean: true
+      - bash: |
+          python -m pip install --upgrade pip
+          pip install build twine
+        displayName: 'Install dependencies'
+      - bash: |
+          set -ux
+          curl --output /dev/null --silent --head --fail --location \
+          "https://$(ARTIFACTORY_USER):$(ARTIFACTORY_API_KEY)@schwarzit.jfrog.io/artifactory/xx-sit-uapc-$(PROJECT_ID)-pypi-local/$(packageName)/${ARTIFACT_LABEL}/$(packageName)-${ARTIFACT_LABEL}-py3-none-any.whl"
+          if [ $? -eq 0 ]; then
+           "Python Wheel already published in Artifactory."
+          else
+            python -m build
+            python -m twine upload --repository-url \
+            https://schwarzit.jfrog.io/artifactory/api/pypi/xx-sit-uapc-$(PROJECT_ID)-pypi-local \
+            ./dist/*.whl -u $(ARTIFACTORY_USER) -p $(ARTIFACTORY_API_KEY) --verbose
+          fi
+        workingDirectory: library
+        env:
+          ARTIFACT_LABEL: $(ARTIFACT_LABEL)
+        displayName: 'Build and publish package'
