@@ -47,6 +47,11 @@ jobs:
       - checkout: self
         clean: true
       - bash: |
+          # Replacement for 'UsePythonVersion'. Creates a venv and adds it's path to the $PATH for future tasks
+          python${{ parameters.pythonVersion }} -m venv prj-venv &&
+          echo "##vso[task.prependpath]$(pwd)/prj-venv/bin"
+        displayName: 'Create python venv and prepend path'
+      - bash: |
           python -m pip install --upgrade pip
           pip install build twine
         displayName: 'Install dependencies'
