@@ -68,7 +68,6 @@ jobs:
             https://schwarzit.jfrog.io/artifactory/api/pypi/xx-sit-uapc-$(PROJECT_ID)-pypi-local \
             ./dist/*.whl -u $(ARTIFACTORY_USER) -p $(ARTIFACTORY_API_KEY) --verbose
           fi
-        workingDirectory: library
         env:
           ARTIFACT_LABEL: $(ARTIFACT_LABEL)
         displayName: 'Build and publish package'
