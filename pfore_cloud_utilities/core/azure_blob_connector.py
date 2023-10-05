@@ -1,5 +1,4 @@
 import io
-from typing import Union
 
 from azure.identity import DefaultAzureCredential, ClientSecretCredential
 from azure.storage.blob import BlobServiceClient, BlobClient
