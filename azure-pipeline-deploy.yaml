@@ -46,7 +46,7 @@ stages:
                 # version 0.0.0 will be used
                 if [ ! $(git tag -l) ]; then
                   latestTag="0.0.0"
-                else:
+                else
                   latestTag=$(git describe --tags $(git rev-list --tags --max-count=1))
                   latestTag=${latestTag//v}
                 fi

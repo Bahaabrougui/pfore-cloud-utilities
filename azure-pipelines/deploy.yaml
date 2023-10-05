@@ -51,6 +51,7 @@ jobs:
           pip install build twine
         displayName: 'Install dependencies'
       - bash: |
+          test $(ARTIFACT_LABEL)
           set -ux
           curl --output /dev/null --silent --head --fail --location \
           "https://$(ARTIFACTORY_USER):$(ARTIFACTORY_API_KEY)@schwarzit.jfrog.io/artifactory/xx-sit-uapc-$(PROJECT_ID)-pypi-local/$(packageName)/${ARTIFACT_LABEL}/$(packageName)-${ARTIFACT_LABEL}-py3-none-any.whl"
