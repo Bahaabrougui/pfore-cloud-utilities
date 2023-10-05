@@ -58,7 +58,6 @@ stages:
 
               echo "##vso[task.setvariable variable=ARTIFACT_LABEL;isOutput=true]${ARTIFACT_LABEL}"
             name: labels
-            env:
             displayName: 'Generate Library label'
 
   - stage: deploy_library
