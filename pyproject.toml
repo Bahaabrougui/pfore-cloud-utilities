@@ -46,7 +46,7 @@ documentation = 'https://dev.azure.com/schwarzit/schwarzit.uapc-pfore/_git/cloud
 #
 # Requirements for building the Python package
 [build-system]
-requires = ['setuptools>=45']
+requires = ['setuptools>=45,<57']
 build-backend = 'setuptools.build_meta'
 
 
