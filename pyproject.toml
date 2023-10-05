@@ -1,7 +1,7 @@
 # ===== PROJECT ===========================================================
 #
 [project]
-name = 'cloud-utilities'
+name = 'pfore-cloud-utilities'
 authors = [
     {name = 'BahaEddine Abrougui', email = 'bahaeddine.abrougui@lidl.com'},
 ]

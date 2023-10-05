@@ -5,7 +5,7 @@ from .core.databricks_workspace import DatabricksWorkspace
 try:
     # Dynamically get the version of the installed module
     import importlib
-    __version__ = importlib.metadata.version("cloud-utilities")
+    __version__ = importlib.metadata.version("pfore-cloud-utilities")
 except Exception:
     # package is not installed
     pass

@@ -23,7 +23,7 @@ variables:
   - name: DeploymentStageShort
     value: e
   - name: packageName
-    value: cloud-utilities
+    value: pfore-cloud-utilities
 
 stages:
   - stage: labels
