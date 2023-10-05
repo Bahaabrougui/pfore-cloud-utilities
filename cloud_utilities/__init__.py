@@ -1,8 +1,13 @@
-# Dynamically get the version of the installed module
-from importlib.metadata import version, PackageNotFoundError
+from .core.azure_blob_connector import AzureBlobConnector
+from .core.azure_aad_token_generator import AADTokenGenerator
+from .core.databricks_workspace import DatabricksWorkspace
 
 try:
-    __version__ = version("cloud-utilities")
-except PackageNotFoundError:
+    # Dynamically get the version of the installed module
+    import importlib
+    __version__ = importlib.metadata.version("cloud-utilities")
+except Exception:
     # package is not installed
     pass
+finally:
+    del importlib
