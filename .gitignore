@@ -1,2 +1,4 @@
 .cache
 .idea
+pfore_cloud_utilities.egg-info
+dist
