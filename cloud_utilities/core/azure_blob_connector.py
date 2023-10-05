@@ -45,22 +45,30 @@ class AzureBlobConnector(metaclass=Singleton):
             logging_enable=True,
         )
 
-    def upload(self, contents: bytes, container_name: str, file: str) -> None:
-        blob_client = self._get_blob_client(container_name, file)
+    def upload(self, contents: bytes, container_name: str, path: str) -> None:
+        """Uploads content in bytes to a blob container.
+
+        :param contents: Contents to upload, in bytes
+        :param container_name: Name of the blob container, if it doesn't
+            exist it will be created as long as permission scope allows it
+        :param path: Path to write to
+        """
+        blob_client = self._get_blob_client(container_name, path)
         blob_client.upload_blob(contents, overwrite=True)
 
     def download(
             self,
             container_name: str,
-            file: str,
-            bytes_io_obj: io.BytesIO = None,
-    ) -> Union[bytes, io.BytesIO]:
-        blob_client = self._get_blob_client(container_name, file)
+            path: str,
+    ) -> bytes:
+        """Downloads content from blob storage
+
+        :param container_name: Name of the blob container
+        :param path: Path to file
+        :return: Blob content in bytes
+        """
+        blob_client = self._get_blob_client(container_name, path)
         stream = blob_client.download_blob()
-        if bytes_io_obj:
-            stream.readinto(bytes_io_obj)
-            bytes_io_obj.seek(0)
-            return bytes_io_obj
         with io.BytesIO() as bytes_io_obj:
             stream.readinto(bytes_io_obj)
             bytes_io_obj.seek(0)
