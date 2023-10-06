@@ -1,5 +1,5 @@
-Quickstart
-==========
+Setting up databricks-connect
+=============================
 
 To run code remotely on a databricks cluster, we'll use databricks-connect_
 package. Note that development on clusters of versions `13.0` is not yet
@@ -64,18 +64,18 @@ parquet file is listed below.
     from pyspark.sql.session import SparkSession
 
     from pfore_cloud_utilities import AzureBlobConnector
-    from pfore_cloud_utilities import DatabricksWorkspace
+    from pfore_cloud_utilities import get_workspace_secret_value
 
     # Init contexts
     spark = SparkSession.builder.getOrCreate()
 
     # Init Blob Storage connection
     azure_blob_connector = AzureBlobConnector(
-        spn_client_id=DatabricksWorkspace().get_workspace_secret_value(
+        spn_client_id=get_workspace_secret_value(
             secret_key='AzureProjectServicePrincipalClientId',
             workspace='dev',
         ),
-        spn_client_secret=DatabricksWorkspace().get_workspace_secret_value(
+        spn_client_secret=get_workspace_secret_value(
             secret_key='AzureProjectServicePrincipalSecret',
             workspace='dev',
         ),
@@ -96,11 +96,24 @@ parquet file is listed below.
 
 
 It is important to know that only the spark code
-is executed on the cluster, the rest is executed locally, therefore notebook
-operations like accessing filesystem using `/dbfs` or mounted files using
-`/mnt` will fail. Use the :class:`AzureBlobConnector` class to communicate
+is executed on the cluster, the rest is executed locally, therefore classical
+notebook operations like accessing filesystem using `/dbfs`
+or mounted files using `/mnt` will fail.
+Use the :class:`AzureBlobConnector` class to communicate
 with blob storage instead of mounts as mounts are deprecated with the birth of
 `Unity Catalog`_.
+Furthermore instantiate `dbutils` instance to interact with the cluster
+using dbutils as you're used to do in the notebook. This can be done with
+the following few lines of code:
+
+.. code-block:: python
+
+    from pyspark.dbutils import DBUtils
+    from pyspark.sql.session import SparkSession
+
+    spark = SparkSession.builder.getOrCreate()
+    dbutils = DBUtils().get_dbutils(spark)
+    # Execute dbutils method as usual with dbutils.<method>()
 
 .. _databricks-connect: https://learn.microsoft.com/en-us/azure/databricks/dev-tools/databricks-connect-legacy
 .. _Unity Catalog: https://www.databricks.com/product/unity-catalog

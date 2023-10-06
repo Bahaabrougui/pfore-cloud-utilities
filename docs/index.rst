@@ -4,9 +4,9 @@
     :caption: Getting started
     :hidden:
 
-    install
-    quickstart
     overview
+    install
+    setting_databricks_connect
     authentication
     fetch_secrets
 

@@ -3,7 +3,8 @@ Fetching KeyVault Secrets
 
 To abstract secrets fetching from keyvault,
 :class:`pfore-cloud-utilities.DatabricksWorkspace` was implemented,
-you can use :func:`get_workspace_secret_value` to securely retrieve secrets.
+you can directly use :func:`get_workspace_secret_value`
+to securely retrieve secrets.
 
 This requires having a Databricks Secret Scope mirroring an Azure Keyvault
 Scope, which is implemented by default for UAPC projects, so you'll only
@@ -45,7 +46,9 @@ code below.
 
 .. code-block:: python
 
-    azure_spn_client_id = DatabricksWorkspace().get_workspace_secret_value(
+    from pfore-cloud-utilities import get_workspace_secret_value
+
+    azure_spn_client_id = get_workspace_secret_value(
             secret_key='AzureProjectServicePrincipalClientId',
             workspace='dev',
             scope='uapc-prj-kv-secret-scope',

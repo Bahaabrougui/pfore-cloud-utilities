@@ -41,7 +41,6 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.intersphinx',
     'sphinx_copybutton',
-    'jupyter_sphinx',
 ]
 
 napoleon_use_ivar = True  # List of class attributes
