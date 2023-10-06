@@ -1,0 +1,12 @@
+﻿AADTokenGenerator
+=================
+
+.. currentmodule:: pfore_cloud_utilities
+
+.. autoclass:: AADTokenGenerator
+
+
+get\_token\(\)
+--------------
+.. automethod:: AADTokenGenerator.get_token
+    

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting up databricks-connect &mdash; Documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Authentication" href="authentication.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pfore-cloud-utilities
+          </a>
+              <div class="version">
+                pre-release
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up databricks-connect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fetching_secrets.html">Fetching Key Vault secrets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/pfore_cloud_utilities.html">pfore-cloud-utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pfore-cloud-utilities</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setting up databricks-connect</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/setting_databricks_connect.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-up-databricks-connect">
+<h1>Setting up databricks-connect<a class="headerlink" href="#setting-up-databricks-connect" title="Link to this heading"></a></h1>
+<p>To run code remotely on a databricks cluster, we’ll use <a class="reference external" href="https://learn.microsoft.com/en-us/azure/databricks/dev-tools/databricks-connect-legacy">databricks-connect</a>
+package. Note that development on clusters of versions <cite>13.0</cite> is not yet
+supported due to the unavailability of <a class="reference external" href="https://www.databricks.com/product/unity-catalog">Unity Catalog</a> within the schwarz
+universe. This guide will cover clusters of versions <cite>12.*</cite>.</p>
+<p>The first step would be to create a <code class="file docutils literal notranslate"><span class="pre">databricks-connect</span></code> file under your
+home directory. The file will have the following structure:</p>
+<div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="na">{</span>
+<span class="w">  </span><span class="na">&quot;host&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;link-to-databricks-workspace&quot;,</span>
+<span class="w">  </span><span class="na">&quot;token&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;your-personal-access-token&quot;,</span>
+<span class="w">  </span><span class="na">&quot;cluster_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;id-to-your-cluster&gt;&quot;,</span>
+<span class="w">  </span><span class="na">&quot;org_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;org-id&gt;&quot;,</span>
+<span class="w">  </span><span class="na">&quot;port&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;cluster-port, default is 15001&gt;&quot;</span>
+<span class="na">}</span>
+</pre></div>
+</div>
+<p>Both <cite>cluster_id</cite> and <cite>org_id</cite> can be fetched from the cluster url. When you
+click on a cluster from the databricks UI, the url will look like:
+<code class="file docutils literal notranslate"><span class="pre">https://&lt;host&gt;/?o=637714045082932#setting/clusters/0926-150153-dz1yndfb/</span></code>
+where the string after <strong>?o=</strong> is the <strong>org_id</strong> and the string
+after <strong>/clusters/</strong> is the <strong>cluster_id</strong>.</p>
+<p>Once the file is set up, you’ll have to create a virtual env with a python
+version that matches your cluster python version (which is <strong>3.9.5</strong> in the
+case of <cite>12.*</cite> clusters) and install a <cite>databricks-connect</cite> package that
+major’s matches the cluster version so <cite>12.*.*</cite>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming pyenv and pyenv virtualenv is installed</span>
+pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.9.5
+pyenv<span class="w"> </span>virtualenv<span class="w"> </span><span class="m">3</span>.9.5<span class="w"> </span>databricks12
+
+<span class="c1"># Symlink pyenv env to a desired repo for easier access</span>
+ln<span class="w"> </span>-s<span class="w"> </span>~/.pyenv/versions/databricks12<span class="w"> </span>&lt;path-to-your-desired-dir&gt;
+
+<span class="c1"># Activate virutal env</span>
+<span class="nb">source</span><span class="w"> </span>&lt;path-to-your-desired-dir&gt;/databricks12/bin/activate
+
+<span class="c1"># Install databricks-connect</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;databricks-connect&gt;=12.0,&lt;13.0&quot;</span>
+
+<span class="c1"># Now install the pfore-cloud-utilities package</span>
+pip<span class="w"> </span>install<span class="w"> </span>pfore-cloud-utilities
+</pre></div>
+</div>
+<p>Please note that this is a private repo and this guide assumes you’re familiar
+with setting up <cite>pip</cite> connection with artifactory.</p>
+<p>Once you’re all set up you can start writing code from your favourite IDE and
+running spark statements directly on the cluster. If the cluster specified in
+the config file is down, it will first start it.</p>
+<p>Before you run a script, make sure to add the env variable
+<strong>PYSPARK_PYTHON=python3</strong>. This can be done in Pycharm for instance by
+accessing <cite>Run</cite> menu in the toolbar, <cite>Edit Configurations</cite> and add it in
+the <cite>Environmental variables</cite> section.</p>
+<p>Example of executing a spark sql query, and saving results in blob storage as
+parquet file is listed below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+
+<span class="kn">from</span> <span class="nn">pyspark.sql.session</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="kn">from</span> <span class="nn">pfore_cloud_utilities</span> <span class="kn">import</span> <span class="n">AzureBlobConnector</span>
+<span class="kn">from</span> <span class="nn">pfore_cloud_utilities</span> <span class="kn">import</span> <span class="n">get_workspace_secret_value</span>
+
+<span class="c1"># Init contexts</span>
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="c1"># Init Blob Storage connection</span>
+<span class="n">azure_blob_connector</span> <span class="o">=</span> <span class="n">AzureBlobConnector</span><span class="p">(</span>
+    <span class="n">spn_client_id</span><span class="o">=</span><span class="n">get_workspace_secret_value</span><span class="p">(</span>
+        <span class="n">secret_key</span><span class="o">=</span><span class="s1">&#39;AzureProjectServicePrincipalClientId&#39;</span><span class="p">,</span>
+        <span class="n">workspace</span><span class="o">=</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">spn_client_secret</span><span class="o">=</span><span class="n">get_workspace_secret_value</span><span class="p">(</span>
+        <span class="n">secret_key</span><span class="o">=</span><span class="s1">&#39;AzureProjectServicePrincipalSecret&#39;</span><span class="p">,</span>
+        <span class="n">workspace</span><span class="o">=</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">account_url</span><span class="o">=</span><span class="n">storage_account_url</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    SELECT * from my_table</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;&lt;path-in-the-blob-storage-container&gt;/mydata.parquet&#39;</span>
+<span class="n">bytes_parquet_df</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">bytes_parquet_df</span><span class="p">)</span>
+<span class="n">azure_blob_connector</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
+    <span class="n">container_name</span><span class="o">=</span><span class="s1">&#39;&lt;my-blob-container-name&gt;&#39;</span><span class="p">,</span>
+    <span class="n">contents</span><span class="o">=</span><span class="n">bytes_parquet_df</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>It is important to know that only the spark code
+is executed on the cluster, the rest is executed locally, therefore classical
+notebook operations like accessing filesystem using <cite>/dbfs</cite>
+or mounted files using <cite>/mnt</cite> will fail.
+Use the <code class="xref py py-class docutils literal notranslate"><span class="pre">AzureBlobConnector</span></code> class to communicate
+with blob storage instead of mounts as mounts are deprecated with the birth of
+<a class="reference external" href="https://www.databricks.com/product/unity-catalog">Unity Catalog</a>.
+Furthermore instantiate <cite>dbutils</cite> instance to interact with the cluster
+using dbutils as you’re used to do in the notebook. This can be done with
+the following few lines of code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.dbutils</span> <span class="kn">import</span> <span class="n">DBUtils</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.session</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<span class="n">dbutils</span> <span class="o">=</span> <span class="n">DBUtils</span><span class="p">()</span><span class="o">.</span><span class="n">get_dbutils</span><span class="p">(</span><span class="n">spark</span><span class="p">)</span>
+<span class="c1"># Execute dbutils method as usual with dbutils.&lt;method&gt;()</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="authentication.html" class="btn btn-neutral float-right" title="Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-2023 lidl e-commerce.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

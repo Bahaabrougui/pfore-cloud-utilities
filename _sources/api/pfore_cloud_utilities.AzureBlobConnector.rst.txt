@@ -1,0 +1,16 @@
+﻿AzureBlobConnector
+==================
+
+.. currentmodule:: pfore_cloud_utilities
+
+.. autoclass:: AzureBlobConnector
+
+
+download\(\)
+------------
+.. automethod:: AzureBlobConnector.download
+    
+upload\(\)
+----------
+.. automethod:: AzureBlobConnector.upload
+    
