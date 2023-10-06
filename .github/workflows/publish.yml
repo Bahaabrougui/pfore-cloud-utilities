@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: '3.9'
 
-    # Docuemntation
+    # Documentation
     - name: Install doc dependencies
       run: |
         pip install -r requirements.txt
