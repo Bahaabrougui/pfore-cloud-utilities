@@ -4,8 +4,6 @@ import shutil
 
 import toml
 
-import pfore_cloud_utilities
-
 import audeer
 
 
@@ -16,7 +14,7 @@ config = toml.load('../pyproject.toml')
 project = config['project']['name']
 copyright = f'2023-{date.today().year} lidl e-commerce'
 author = ', '.join(author['name'] for author in config['project']['authors'])
-version = audeer.git_repo_version()
+version = os.environ.get('ARTIFACT_LABEL', 'pre-release')
 title = 'Documentation'
 
 
@@ -59,12 +57,7 @@ graphviz_output_format = 'svg'
 toc_object_entries = False
 
 # HTML --------------------------------------------------------------------
-html_theme = 'sizzle'
-html_theme_options = {
-    'display_version': True,
-    'logo_only': False,
-    'footer_links': False,
-}
+html_theme = 'sphinx_rtd_theme'
 html_context = {}
 html_title = title
 

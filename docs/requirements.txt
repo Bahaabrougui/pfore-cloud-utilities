@@ -1,7 +1,7 @@
 docutils
 ipykernel
 sphinx >=3.5.4
-sphinx-sizzle-theme
+sphinx-rtd-theme
 sphinx-autodoc-typehints
 sphinx-copybutton
 toml

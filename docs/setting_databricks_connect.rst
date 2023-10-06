@@ -21,24 +21,30 @@ home directory. The file will have the following structure:
 
 Both `cluster_id` and `org_id` can be fetched from the cluster url. When you
 click on a cluster from the databricks UI, the url will look like:
-`https://<host>/?o=637714045082932#setting/clusters/0926-150153-dz1yndfb/`
-where the string after `?o=` is the `org_id` and the string after `/clusters/`
-is the `cluster_id`.
+:file:`https://<host>/?o=637714045082932#setting/clusters/0926-150153-dz1yndfb/`
+where the string after **?o=** is the **org_id** and the string
+after **/clusters/** is the **cluster_id**.
 
 Once the file is set up, you'll have to create a virtual env with a python
-version that matches your cluster python version (which is 3.9.5 in the case
-of 12.* clusters) and install a `databricks-connect` package that major's
-matches the cluster version so `12.*.*`.
+version that matches your cluster python version (which is **3.9.5** in the
+case of `12.*` clusters) and install a `databricks-connect` package that
+major's matches the cluster version so `12.*.*`.
 
 .. code-block:: bash
 
     # Assuming pyenv and pyenv virtualenv is installed
     pyenv install 3.9.5
     pyenv virtualenv 3.9.5 databricks12
-    # Symlink pyenv env ta desired repo
+
+    # Symlink pyenv env to a desired repo for easier access
     ln -s ~/.pyenv/versions/databricks12 <path-to-your-desired-dir>
+
+    # Activate virutal env
     source <path-to-your-desired-dir>/databricks12/bin/activate
+
+    # Install databricks-connect
     pip install "databricks-connect>=12.0,<13.0"
+
     # Now install the pfore-cloud-utilities package
     pip install pfore-cloud-utilities
 
