@@ -1,7 +1,8 @@
-.cache
-.idea
-dist
-__pycache__
+.cache/
+.idea/
+dist/
+pfore_cloud_utilities/__pycache__/
 *.egg-info/
 .eggs/
-build/
+docs/_build/
+docs/api/
