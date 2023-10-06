@@ -1,5 +1,5 @@
-Fetching KeyVault Secrets
-=========================
+Fetching Key Vault secrets
+==========================
 
 To abstract secrets fetching from keyvault,
 :class:`pfore-cloud-utilities.DatabricksWorkspace` was implemented,
