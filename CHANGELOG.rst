@@ -11,7 +11,7 @@ and this project adheres to `Semantic Versioning`_.
 Version 0.0.0 (2023-10-06)
 --------------------------
 
-* Added: initial release
+* Added: Initial release
 
 
 .. _Keep a Changelog:
