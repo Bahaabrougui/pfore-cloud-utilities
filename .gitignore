@@ -2,3 +2,4 @@
 .idea
 pfore_cloud_utilities.egg-info
 dist
+docs/_build

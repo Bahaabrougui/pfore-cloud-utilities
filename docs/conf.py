@@ -16,7 +16,7 @@ config = toml.load('../pyproject.toml')
 project = config['project']['name']
 copyright = f'2023-{date.today().year} lidl e-commerce'
 author = ', '.join(author['name'] for author in config['project']['authors'])
-version = pfore_cloud_utilities.__version__
+version = audeer.git_repo_version()
 title = 'Documentation'
 
 
