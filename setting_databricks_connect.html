@@ -39,7 +39,7 @@
             pfore-cloud-utilities
           </a>
               <div class="version">
-                pre-release
+                v0.0.0+dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -169,12 +169,17 @@ parquet file is listed below.</p>
     <span class="n">account_url</span><span class="o">=</span><span class="n">storage_account_url</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="c1"># Run SQL statement on cluster and save results as a pandas.DataFrame</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">    SELECT * from my_table</span>
 <span class="s1">&#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+<span class="c1"># Specify path in the blob storage</span>
 <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;&lt;path-in-the-blob-storage-container&gt;/mydata.parquet&#39;</span>
+<span class="c1"># Declare a BytesIO object acting as an intermediate to save the bytes</span>
+<span class="c1"># content of the parquet object</span>
 <span class="n">bytes_parquet_df</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
 <span class="n">data</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">bytes_parquet_df</span><span class="p">)</span>
+<span class="c1"># Upload the parquet object to blob storage</span>
 <span class="n">azure_blob_connector</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
     <span class="n">container_name</span><span class="o">=</span><span class="s1">&#39;&lt;my-blob-container-name&gt;&#39;</span><span class="p">,</span>
     <span class="n">contents</span><span class="o">=</span><span class="n">bytes_parquet_df</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span>

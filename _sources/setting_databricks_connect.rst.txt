@@ -88,12 +88,17 @@ parquet file is listed below.
         account_url=storage_account_url,
     )
 
+    # Run SQL statement on cluster and save results as a pandas.DataFrame
     data = spark.sql('''
         SELECT * from my_table
     ''').toPandas()
+    # Specify path in the blob storage
     path = '<path-in-the-blob-storage-container>/mydata.parquet'
+    # Declare a BytesIO object acting as an intermediate to save the bytes
+    # content of the parquet object
     bytes_parquet_df = BytesIO()
     data.to_parquet(bytes_parquet_df)
+    # Upload the parquet object to blob storage
     azure_blob_connector.upload(
         container_name='<my-blob-container-name>',
         contents=bytes_parquet_df.getvalue(),
