@@ -57,6 +57,9 @@ def get_workspace_secret_value(
 
     Returns:
         Secret value, based64 decoded
+
+    Raises:
+        FileNotFoundError: If `~/.databrickscfg` config file is not found
     
     """
 

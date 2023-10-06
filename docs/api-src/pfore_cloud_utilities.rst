@@ -1,7 +1,7 @@
-audb
-====
+pfore-cloud-utilities
+=====================
 
-.. automodule:: pfore-cloud-utilities
+.. automodule:: pfore_cloud_utilities
 
 .. rubric:: Classes
 
@@ -9,7 +9,7 @@ audb
     :toctree:
     :nosignatures:
 
-    AzureAADTokenGenerator
+    AADTokenGenerator
     AzureBlobConnector
     DatabricksWorkspace
 

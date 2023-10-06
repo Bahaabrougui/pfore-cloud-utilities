@@ -7,26 +7,27 @@ from .singleton import Singleton
 
 
 class AADTokenGenerator(metaclass=Singleton):
-    """Singleton class to handle AAD token generation of AAD resources."""
+    """Singleton class to handle AAD token generation of AAD resources.
+
+    Connection is created using either a managed identity or an SPN.
+
+    If spn_client_id or spn_client_secret are set to None, the client
+    will assume Managed Identity as an authentication method.
+
+    Args:
+        azure_tenant_id: Azure tenant ID, defaulted to schwarz azure tenant id
+        spn_client_id: Service Principal client ID
+        spn_client_secret: Service Principal client secret
+
+    """
 
     def __init__(
             self,
+            azure_tenant_id: str = 'd04f4717-5a6e-4b98-b3f9-6918e0385f4c',
             spn_client_id: str = None,
             spn_client_secret: str = None,
-            azure_tenant_id: str = 'd04f4717-5a6e-4b98-b3f9-6918e0385f4c',
             ) -> None:
-        """Creates a connection toward the resource using either a managed
-        identity or an SPN.
 
-        If spn_client_id or spn_client_secret are set to None, the client
-        will assume Managed Identity as an authentification method.
-
-        Args:
-            spn_client_id: Service Principal client ID
-            spn_client_secret: Service Principal client secret
-            azure_tenant_id: Azure tenant ID
-
-        """
         if spn_client_id is None or spn_client_secret is None:
             self._credentials = DefaultAzureCredential()
         else:
@@ -49,8 +50,8 @@ class AADTokenGenerator(metaclass=Singleton):
             AAD token, valid for 60 minutes.
 
         Raises:
-            NotImplementedError: If the specified `aad_resource_name` does not exist
-                in the `AAD_RESOURCE_NAME_TO_ID` in `define.py`
+            NotImplementedError: If the specified `aad_resource_name`
+            does not exist in `AAD_RESOURCE_NAME_TO_ID`, defined in `define.py`
 
         """
         if aad_resource_name not in AAD_RESOURCE_NAME_TO_ID.keys():
