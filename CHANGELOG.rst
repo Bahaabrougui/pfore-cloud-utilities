@@ -8,10 +8,10 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
-Version x.x.x (yyyy-mm-dd)
---------------------------
+Version 0.0.0+dev0 (2023-10-06)
+-------------------------------
 
-* Added: initial release
+* Added: initial pre-release
 
 
 .. _Keep a Changelog:
