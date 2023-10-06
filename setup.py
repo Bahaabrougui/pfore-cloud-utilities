@@ -9,4 +9,6 @@ try:
     )
 # If build is triggered for gitHub, use setuptools_scm to fetch tag as version
 except KeyError:
-    pass
+    setup(
+        use_scm_version=True
+    )
