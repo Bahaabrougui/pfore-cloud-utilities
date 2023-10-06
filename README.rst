@@ -2,5 +2,5 @@
 pfore-cloud-utilities
 =====================
 
-**pfore-cloud-uitilites** is a python package to abstract
+**pfore-cloud-utilities** is a python package to abstract
 cloud utility functions.
