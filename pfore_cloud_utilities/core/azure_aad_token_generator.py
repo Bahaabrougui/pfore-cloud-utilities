@@ -2,11 +2,8 @@ import datetime
 
 from azure.identity import DefaultAzureCredential, ClientSecretCredential
 
+from .define import AAD_RESOURCE_NAME_TO_ID
 from .singleton import Singleton
-
-aad_resource_name_id_dict = {
-    'databricks': '2ff814a6-3304-4ab8-85cb-cd0e6f879c1d',
-}
 
 
 class AADTokenGenerator(metaclass=Singleton):
@@ -20,12 +17,15 @@ class AADTokenGenerator(metaclass=Singleton):
             ) -> None:
         """Creates a connection toward the resource using either a managed
         identity or an SPN.
+
         If spn_client_id or spn_client_secret are set to None, the client
         will assume Managed Identity as an authentification method.
 
-        :arg spn_client_id: Service Principal client ID
-        :arg spn_client_secret: Service Principal client secret
-        :arg azure_tenant_id: Azure tenant ID
+        Args:
+            spn_client_id: Service Principal client ID
+            spn_client_secret: Service Principal client secret
+            azure_tenant_id: Azure tenant ID
+
         """
         if spn_client_id is None or spn_client_secret is None:
             self._credentials = DefaultAzureCredential()
@@ -39,15 +39,24 @@ class AADTokenGenerator(metaclass=Singleton):
 
     def get_token(self, aad_resource_name: str) -> str:
         """Helper method that uses `_credentials` variables
-        to make call to the AAD API to generate token
-        using Managed Identities.
+        to make calls to the AAD API to generate token
+        using Managed Identities or SPNs based connection.
 
-        :arg: aad_resource_name: AAD resource name
+        Args:
+            aad_resource_name: AAD resource name
 
-        :returns: AAD token, valid for 60 minutes.
+        Returns:
+            AAD token, valid for 60 minutes.
+
+        Raises:
+            NotImplementedError: If the specified `aad_resource_name` does not exist
+                in the `AAD_RESOURCE_NAME_TO_ID` in `define.py`
+
         """
-        if aad_resource_name not in aad_resource_name_id_dict.keys():
-            raise ValueError('Please specify a valid AAD resource name.')
+        if aad_resource_name not in AAD_RESOURCE_NAME_TO_ID.keys():
+            raise NotImplementedError(
+                'Please specify a valid AAD resource name.'
+            )
 
         # AAD token is only valid for 1 hour
         if not (aad_resource_name in self._token.keys()) or (
@@ -59,7 +68,7 @@ class AADTokenGenerator(metaclass=Singleton):
             self._token[aad_resource_name][
                 'token'
             ] = self._credentials.get_token(
-                f"{aad_resource_name_id_dict[aad_resource_name]}/.default"
+                f"{AAD_RESOURCE_NAME_TO_ID[aad_resource_name]}/.default"
             ).token
 
         return self._token[aad_resource_name]['token']

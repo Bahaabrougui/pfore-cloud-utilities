@@ -1,6 +1,6 @@
 from .core.azure_blob_connector import AzureBlobConnector
 from .core.azure_aad_token_generator import AADTokenGenerator
-from .core.databricks_workspace import DatabricksWorkspace
+from .core.databricks_workspace import get_workspace_secret_value
 
 try:
     # Dynamically get the version of the installed module
