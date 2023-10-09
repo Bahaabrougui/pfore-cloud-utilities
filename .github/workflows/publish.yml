@@ -39,7 +39,8 @@ jobs:
         if [[ $TAG == *"dev"* ]]; then
           export ARTIFACT_LABEL=${TAG:1}
         fi
-        echo $ARTIFACT_LABEL
+        python -m build
+        python -m twine upload dist/*
 
     # Documentation
     - name: Install doc dependencies
