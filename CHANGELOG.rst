@@ -8,12 +8,6 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
-Version 0.0.0+dev1 (2023-10-09)
--------------------------------
-
-* Added: Initial public pre-release
-
-
 Version 0.0.0+dev0 (2023-10-06)
 -------------------------------
 

@@ -17,7 +17,7 @@ are discoverable. To do so, edit or create if not yet created
 pip configuration file under :file:`${HOME}/.pip/pip.conf`. The structure of
 the configuration file is following:
 
-.. code-block:: conf
+.. code-block:: cfg
 
     [global]
     timeout = 60
