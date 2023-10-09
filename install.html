@@ -39,7 +39,7 @@
             pfore-cloud-utilities
           </a>
               <div class="version">
-                v0.0.0+dev1
+                v0.0.0-dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -102,23 +102,6 @@ $<span class="w"> </span><span class="c1"># source ${HOME}/.envs/pfore-cloud-uti
 $<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pfore-cloud-utilities
 </pre></div>
 </div>
-<p>Please note that if you’re working behind a firewall or a VPN, you need to
-configure pip to mirror the public <a class="reference external" href="https://pypi.org/project/pfore-cloud-utilities">PyPI</a> repository so that public packages
-are discoverable. To do so, edit or create if not yet created
-pip configuration file under <code class="file docutils literal notranslate"><span class="pre">$</span><em><span class="pre">HOME</span></em><span class="pre">/.pip/pip.conf</span></code>. The structure of
-the configuration file is following:</p>
-<div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="k">[global]</span>
-<span class="na">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">60</span>
-<span class="na">index-url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://&lt;username&gt;:&lt;api-key&gt;@&lt;domain&gt;/&lt;tool&gt;/api/pypi/&lt;private-repository-name&gt;/simple</span>
-<span class="na">extra-index-url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://&lt;username&gt;:&lt;api-key&gt;&lt;domain&gt;/&lt;tool&gt;/api/pypi/pypi/simple</span>
-</pre></div>
-</div>
-<p>For Artifactory users, <cite>&lt;tool&gt;</cite> will be <cite>artifactory</cite> and <cite>&lt;username&gt;</cite> is your
-artifactory username, <cite>&lt;api-key&gt;</cite> is your artifactory API key and <cite>&lt;domain&gt;</cite>
-is your organisation domain name on Artifactory.</p>
-<p>Note that the repository that mirrors public <a class="reference external" href="https://pypi.org/project/pfore-cloud-utilities">PyPI</a> needs to be first
-configured on Artifactory. Your organisation should have already this set up
-and you’d only need to configure <cite>pip</cite> locally.</p>
 </section>
 
 
