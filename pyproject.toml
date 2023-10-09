@@ -6,7 +6,7 @@ authors = [
     {name = 'BahaEddine Abrougui', email = 'bahaeddine.abrougui@lidl.com'},
 ]
 description = 'Provides utility functions for cloud-based workflows.'
-readme = 'README.md'
+readme = 'README.rst'
 keywords = [
     'databricks',
     'azure',
