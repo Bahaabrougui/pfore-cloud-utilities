@@ -9,16 +9,16 @@ inconsistencies,
 or other things
 that need improvement.
 
-.. _pull request: https://dev.azure.com/schwarzit/schwarzit.uapc-pfore/_git/pfore-cloud-utilities/pullrequests?_a=mine
+.. _pull request: https://github.com/Bahaabrougui/pfore-cloud-utilities/pulls
 
 
 Development Installation
 ------------------------
 
-Instead of pip-installing the latest release from Artifactory_,
-you should get the newest development version from AzureDevops_::
+Instead of pip-installing the latest release from PyPI_,
+you should get the newest development version from GitHub_::
 
-   git clone https://dev.azure.com/schwarzit/schwarzit.uapc-pfore/_git/pfore-cloud-utilities
+   git clone https://github.com/Bahaabrougui/pfore-cloud-utilities
    cd pfore-cloud-utilities
    # Create virtual environment for this project
    # e.g.
@@ -31,8 +31,8 @@ This way,
 your installation always stays up-to-date,
 even if you pull new changes from the Github repository.
 
-.. _Artifactory: https://schwarzit.jfrog.io/ui/repos/tree/General/xx-sit-uapc-pfore-pypi-local/pfore-cloud-utilities
-.. _AzureDevops: https://dev.azure.com/schwarzit/schwarzit.uapc-pfore/_git/pfore-cloud-utilities
+.. _PyPI: https://pypi.org/project/pfore-cloud-utilities
+.. _GitHub: https://github.com/Bahaabrougui/pfore-cloud-utilities
 
 
 Coding Convention
@@ -69,9 +69,9 @@ It can be restricted to specific folders::
 
 
 .. _codespell: https://github.com/codespell-project/codespell/
-.. _PEP8: http://www.python.org/dev/peps/pep-0008/
+.. _PEP8: https://peps.python.org/pep-0008/
 .. _pre-commit: https://pre-commit.com
-.. _ruff: https://beta.ruff.rs
+.. _ruff: https://docs.astral.sh/ruff/
 
 
 Building the Documentation
@@ -94,7 +94,7 @@ It is also possible to automatically check if all links are still valid::
 
    python -m sphinx docs/ build/sphinx/html -b linkcheck
 
-.. _Sphinx: http://sphinx-doc.org
+.. _Sphinx: https://www.sphinx-doc.org/en/master/
 
 
 Running the Tests
@@ -109,7 +109,7 @@ To execute the tests, simply run::
 
    python -m pytest
 
-.. _pytest: https://pytest.org
+.. _pytest: https://docs.pytest.org/en/7.4.x/
 
 
 Creating a New Stable Release
@@ -120,4 +120,4 @@ New releases are made using the following steps:
 #. Update ``CHANGELOG.rst``
 #. Commit those changes as "Release X.Y.Z"
 #. Create an (annotated) tag with ``git tag -a X.Y.Z``
-#. Push the commit and the tag to Azure Devops
+#. Push the commit and the tag to GitHub
