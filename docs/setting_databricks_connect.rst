@@ -82,7 +82,8 @@ parquet file is listed below.
             secret_key='AzureProjectServicePrincipalSecret',
             workspace='dev',
         ),
-        account_url=storage_account_url,
+        azure_tenant_id='<AAD-tenant-ID>', # Your organisation AAD tenant ID
+        account_url='<storage_account_url>', # URL to your storage account
     )
 
     # Run SQL statement on cluster and save results as a pandas.DataFrame
