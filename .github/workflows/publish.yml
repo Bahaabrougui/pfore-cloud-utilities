@@ -29,8 +29,7 @@ jobs:
 
     - name: Get tag's name
       id: get_tag
-      run: |
-        echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+      run: echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
 
     - name: Build and publish
       env:
