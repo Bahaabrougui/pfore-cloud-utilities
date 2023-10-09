@@ -38,9 +38,6 @@
           <a href="../index.html" class="icon icon-home">
             pfore-cloud-utilities
           </a>
-              <div class="version">
-                v0.0.0+dev0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -106,7 +103,7 @@
 <h1>AADTokenGenerator<a class="headerlink" href="#aadtokengenerator" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pfore_cloud_utilities.AADTokenGenerator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pfore_cloud_utilities.</span></span><span class="sig-name descname"><span class="pre">AADTokenGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">azure_tenant_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'d04f4717-5a6e-4b98-b3f9-6918e0385f4c'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_client_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_client_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfore_cloud_utilities/core/azure_aad_token_generator.html#AADTokenGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfore_cloud_utilities.AADTokenGenerator" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pfore_cloud_utilities.</span></span><span class="sig-name descname"><span class="pre">AADTokenGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">azure_tenant_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_client_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_client_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfore_cloud_utilities/core/azure_aad_token_generator.html#AADTokenGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfore_cloud_utilities.AADTokenGenerator" title="Link to this definition"></a></dt>
 <dd><p>Singleton class to handle AAD token generation of AAD resources.</p>
 <p>Connection is created using either a managed identity or an SPN.</p>
 <p>If spn_client_id or spn_client_secret are set to None, the client
@@ -114,7 +111,7 @@ will assume Managed Identity as an authentication method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>azure_tenant_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Azure tenant ID, defaulted to schwarz azure tenant id</p></li>
+<li><p><strong>azure_tenant_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Azure tenant ID, required</p></li>
 <li><p><strong>spn_client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Service Principal client ID</p></li>
 <li><p><strong>spn_client_secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Service Principal client secret</p></li>
 </ul>
