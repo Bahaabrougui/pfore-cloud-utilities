@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
+env:
+  ARTIFACT_LABEL:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,13 +27,23 @@ jobs:
         python -m pip install --upgrade pip
         pip install build twine
 
+    - name: Get tag's name
+      id: get_tag
+      run: |
+        echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        TAG: ${{ steps.get_tag.outputs.TAG }}
       run: |
-        python -m build
-        python -m twine upload dist/*
+      # If it's a pre-release, use custom artifact label e.g. 0.0.0+dev0
+        if [[ $TAG == *"dev"* ]]; then
+          export ARTIFACT_LABEL=${TAG:1}
+        fi
+      # If not, use the setuptools_scm for package versioning
+        echo $ARTIFACT_LABEL
 
     # Documentation
     - name: Install doc dependencies
