@@ -37,7 +37,7 @@ major's matches the cluster version so `12.*.*`.
     pyenv virtualenv 3.9.5 databricks12
 
     # Symlink pyenv env to a desired repo for easier access
-    ln -s ~/.pyenv/versions/databricks12 <path-to-your-desired-dir>
+    ln -s ${HOME}/.pyenv/versions/databricks12 <path-to-your-desired-dir>
 
     # Activate virutal env
     source <path-to-your-desired-dir>/databricks12/bin/activate
@@ -47,9 +47,6 @@ major's matches the cluster version so `12.*.*`.
 
     # Now install the pfore-cloud-utilities package
     pip install pfore-cloud-utilities
-
-Please note that this is a private repo and this guide assumes you're familiar
-with setting up `pip` connection with artifactory.
 
 Once you're all set up you can start writing code from your favourite IDE and
 running spark statements directly on the cluster. If the cluster specified in

@@ -22,8 +22,6 @@ classifiers = [
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
-    # When specified, pypip upload will be rejected
-    'Private :: Do Not Upload',
 ]
 requires-python = '>=3.9'
 dependencies = [
@@ -35,8 +33,8 @@ dependencies = [
 dynamic = ['version']
 
 [project.urls]
-repository = 'https://dev.azure.com/schwarzit/schwarzit.uapc-pfore/_git/cloud-utilities/'
-documentation = 'https://dev.azure.com/schwarzit/schwarzit.uapc-pfore/_git/cloud-utilities?path=/README.md'
+repository = 'https://github.com/Bahaabrougui/pfore-cloud-utilities/'
+documentation = 'https://bahaabrougui.github.io/pfore-cloud-utilities/index.html'
 
 
 # ===== BUILD-SYSTEM ======================================================

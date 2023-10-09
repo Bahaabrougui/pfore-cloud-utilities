@@ -11,8 +11,8 @@ Most of the method requires authentication, refer to the
 Assuming that you'll also want to use the package functions while running
 spark code remotely on databricks, refer to the
 :doc:`setting_databricks_connect` page to see how
-to set up databricks-connect_.
+to set up databricks-connect_ and for coding examples.
 
 .. _Databricks: https://www.databricks.com
-.. _Azure: https://portal.azure.com/#home
+.. _Azure: https://azure.microsoft.com/en-us
 .. _databricks-connect: https://learn.microsoft.com/en-us/azure/databricks/dev-tools/databricks-connect-legacy
