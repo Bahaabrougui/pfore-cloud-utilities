@@ -8,13 +8,6 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
-Version 0.0.0-dev2 (2023-10-09)
--------------------------------
-
-* Added: Description on PyPI
-* Changed: Documentation
-
-
 Version 0.0.0-dev1 (2023-10-09)
 -------------------------------
 
