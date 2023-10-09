@@ -18,7 +18,7 @@ class AzureBlobConnector(metaclass=Singleton):
 
     Args:
         account_url: Storage Account url, required
-        azure_tenant_id: Azure tenant ID, defaulted to schwarz azure tenant id
+        azure_tenant_id: Azure tenant ID, required
         spn_client_id: Service Principal client ID
         spn_client_secret: Service Principal client secret
 
@@ -26,7 +26,7 @@ class AzureBlobConnector(metaclass=Singleton):
     def __init__(
             self,
             account_url: str,
-            azure_tenant_id: str = 'd04f4717-5a6e-4b98-b3f9-6918e0385f4c',
+            azure_tenant_id: str,
             spn_client_id: str = None,
             spn_client_secret: str = None,
             ) -> None:
