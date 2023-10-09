@@ -11,7 +11,7 @@ and this project adheres to `Semantic Versioning`_.
 Version 0.0.0+dev1 (2023-10-09)
 -------------------------------
 
-* Added: Initial public pre-release
+* Added: Initial Public pre-release
 
 
 Version 0.0.0+dev0 (2023-10-06)
