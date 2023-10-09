@@ -36,7 +36,7 @@
             pfore-cloud-utilities
           </a>
               <div class="version">
-                v0.0.0-dev0
+                v0.0.0-dev1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -109,7 +109,7 @@
 <span class="sd">    will assume Managed Identity as an authentication method.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        azure_tenant_id: Azure tenant ID, defaulted to schwarz azure tenant id</span>
+<span class="sd">        azure_tenant_id: Azure tenant ID, required</span>
 <span class="sd">        spn_client_id: Service Principal client ID</span>
 <span class="sd">        spn_client_secret: Service Principal client secret</span>
 
@@ -117,7 +117,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">azure_tenant_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;d04f4717-5a6e-4b98-b3f9-6918e0385f4c&#39;</span><span class="p">,</span>
+            <span class="n">azure_tenant_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">spn_client_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">spn_client_secret</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

@@ -39,7 +39,7 @@
             pfore-cloud-utilities
           </a>
               <div class="version">
-                v0.0.0-dev0
+                v0.0.0-dev1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -123,7 +123,7 @@ pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</s
 pyenv<span class="w"> </span>virtualenv<span class="w"> </span><span class="m">3</span>.9.5<span class="w"> </span>databricks12
 
 <span class="c1"># Symlink pyenv env to a desired repo for easier access</span>
-ln<span class="w"> </span>-s<span class="w"> </span>~/.pyenv/versions/databricks12<span class="w"> </span>&lt;path-to-your-desired-dir&gt;
+ln<span class="w"> </span>-s<span class="w"> </span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/.pyenv/versions/databricks12<span class="w"> </span>&lt;path-to-your-desired-dir&gt;
 
 <span class="c1"># Activate virutal env</span>
 <span class="nb">source</span><span class="w"> </span>&lt;path-to-your-desired-dir&gt;/databricks12/bin/activate
@@ -135,8 +135,6 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot
 pip<span class="w"> </span>install<span class="w"> </span>pfore-cloud-utilities
 </pre></div>
 </div>
-<p>Please note that this is a private repo and this guide assumes you’re familiar
-with setting up <cite>pip</cite> connection with artifactory.</p>
 <p>Once you’re all set up you can start writing code from your favourite IDE and
 running spark statements directly on the cluster. If the cluster specified in
 the config file is down, it will first start it.</p>
@@ -166,7 +164,8 @@ parquet file is listed below.</p>
         <span class="n">secret_key</span><span class="o">=</span><span class="s1">&#39;AzureProjectServicePrincipalSecret&#39;</span><span class="p">,</span>
         <span class="n">workspace</span><span class="o">=</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="n">account_url</span><span class="o">=</span><span class="n">storage_account_url</span><span class="p">,</span>
+    <span class="n">azure_tenant_id</span><span class="o">=</span><span class="s1">&#39;&lt;AAD-tenant-ID&gt;&#39;</span><span class="p">,</span> <span class="c1"># Your organisation AAD tenant ID</span>
+    <span class="n">account_url</span><span class="o">=</span><span class="s1">&#39;&lt;storage_account_url&gt;&#39;</span><span class="p">,</span> <span class="c1"># URL to your storage account</span>
 <span class="p">)</span>
 
 <span class="c1"># Run SQL statement on cluster and save results as a pandas.DataFrame</span>
