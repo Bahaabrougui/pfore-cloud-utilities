@@ -34,7 +34,7 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         TAG: ${{ steps.get_tag.outputs.TAG }}
       run: |
-        # If it's a pre-release, use custom artifact label e.g. 0.0.0+dev0
+        # If it's a pre-release, use custom artifact label e.g. 0.0.0-dev0
         # If not, use the setuptools_scm for package versioning
         if [[ $TAG == *"dev"* ]]; then
           export ARTIFACT_LABEL=${TAG:1}
