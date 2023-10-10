@@ -27,6 +27,7 @@ jobs:
       env:
         ARTIFACT_LABEL: ${{ steps.get_tag.outputs.TAG }}
       run: |
+        echo $ARTIFACT_LABEL
         python -m sphinx docs/ docs/_build/ -b html
 
     - name: Upload artifacts
