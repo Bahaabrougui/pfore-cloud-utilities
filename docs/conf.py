@@ -3,7 +3,6 @@ import os
 import shutil
 
 import toml
-import git
 
 import audeer
 
@@ -15,9 +14,7 @@ config = toml.load('../pyproject.toml')
 project = config['project']['name']
 copyright = f'2023-{date.today().year} lidl e-commerce'
 author = ', '.join(author['name'] for author in config['project']['authors'])
-# Use gitpython to get latest tag as version
-g = git.Git()
-version = g.tag().split('\n')[-1]
+version = os.environ.get('ARTIFACT_LABEL', audeer.git_repo_version())
 raise ValueError(version)
 title = 'Documentation'
 
