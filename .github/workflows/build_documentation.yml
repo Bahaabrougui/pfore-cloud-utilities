@@ -15,7 +15,7 @@ jobs:
 
     - name: Get latest tag's name to use for version
       id: get_tag
-      run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+      run: echo "TAG=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_OUTPUT
 
     - name: Install doc dependencies
       run: |
