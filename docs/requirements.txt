@@ -5,4 +5,5 @@ sphinx-rtd-theme
 sphinx-autodoc-typehints
 sphinx-copybutton
 toml
+gitpython
 audeer
