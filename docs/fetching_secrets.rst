@@ -6,23 +6,36 @@ To abstract secrets fetching from keyvault,
 you can directly use :func:`get_workspace_secret_value`
 to securely retrieve secrets.
 
-This requires having a Databricks Secret Scope mirroring an Azure Keyvault
-Scope, which is implemented by default for UAPC projects, so you'll only
-have to specify the scope's name when retrieving the secret. To list the
-existing scopes within a workspace,
-use `databricks secrets list-scopes`, output will look like
+This requires provisioning a Databricks Secret Scope mirroring an Azure Keyvault
+Scope, which is out-of-scope of this documentation and assumed to be
+implemented for you by your organisation, so you'll only have to specify the
+scope's name when retrieving the secret.
+
+To list the existing scopes within a workspace, use
+`databricks secrets list-scopes`, output will look like
 
 .. code-block:: bash
 
     databricks secrets list-scopes --profile=<profile>
 
-        Scope                     Backend         KeyVault URL
-    ------------------------  --------------  --------------------------------------------
-    uapc-prj-kv-secret-scope  AZURE_KEYVAULT  https://uapc-e-prj-pfore-kv.vault.azure.net/
+          Scope                Backend             KeyVault URL
+    -------------------  -------------------   ---------------------
+    <secret-scope-name>  <key-vault-backend>      <key-vault-url>
 
-This also requires setting up a connection to a Databricks workspace, this
-can be done by simply creating :file:`.databrickscfg` file under your home
-directory, which contains information on your workspace.
+
+For the `databricks secrets` CLI command as well as the
+:func:`get_workspace_secret_value` function to work, a connection to the
+host needs to be set up, which is explained in the following section.
+
+If there are no secret scopes provisioned by you organisation, follow the
+`official tutorial`_ for setting up the secret scope.
+
+.. _official tutorial: https://learn.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes
+
+To set up a connection to a Databricks workspace, simply create a
+:file:`.databrickscfg` file under your home directory. The file contains
+information on the workspaces you'd like to connect to.
+
 Example of how the file is structured for three workspaces, dev, qas and prod
 is shown below.
 
@@ -49,7 +62,7 @@ code below.
     from pfore_cloud_utilities import get_workspace_secret_value
 
     azure_spn_client_id = get_workspace_secret_value(
-            secret_key='AzureProjectServicePrincipalClientId',
+            secret_key='<secret-name-on-azure-key-vault>',
             workspace='dev',
-            scope='uapc-prj-kv-secret-scope',
+            scope='<secret-scope>',
         )
