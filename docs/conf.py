@@ -16,10 +16,10 @@ copyright = f'2023-{date.today().year} lidl e-commerce'
 author = ', '.join(author['name'] for author in config['project']['authors'])
 version = os.environ.get('ARTIFACT_LABEL', audeer.git_repo_version())
 print(version)
-print(os.environ['ARTIFACT_LABEL'])
+print(os.environ.get('ARTIFACT_LABEL'))
 print(audeer.git_repo_tags()[-1])
 import git
-print(git.Git().tags()[-1])
+print(git.Git().tag().split('\n')[-1])
 raise ValueError()
 title = 'Documentation'
 
