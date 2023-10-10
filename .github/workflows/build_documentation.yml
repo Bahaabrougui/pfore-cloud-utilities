@@ -5,8 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 2
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -15,19 +13,24 @@ jobs:
 
     - name: Get latest tag's name to use for version
       id: get_tag
-      run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+      run: |
+        echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+        echo "TAG2=$(git tag -l)" >> $GITHUB_OUTPUT
+
+    - name: Build documentation
+      env:
+        ARTIFACT_LABEL: ${{ steps.get_tag.outputs.TAG }}
+        ARTIFACT_LABEL2: ${{ steps.get_tag.outputs.TAG2 }}
+      run: |
+        echo $ARTIFACT_LABEL
+        echo $ARTIFACT_LABEL2
+        python -m sphinx docs/ docs/_build/ -b html
 
     - name: Install doc dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r docs/requirements.txt
-
-    - name: Build documentation
-      env:
-        ARTIFACT_LABEL: ${{ steps.get_tag.outputs.TAG }}
-      run: |
-        python -m sphinx docs/ docs/_build/ -b html
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
