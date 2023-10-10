@@ -64,7 +64,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs/_build
 
-    # Github release
+    # gitHub release
     - name: Read CHANGELOG
       id: changelog
       run: |
