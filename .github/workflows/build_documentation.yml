@@ -25,8 +25,9 @@ jobs:
 
     - name: Build documentation
       env:
-        ARTIFACT_LABEL: ${{ steps.get_tag.outputs.TAG }}
+        TAG: ${{ steps.get_tag.outputs.TAG }}
       run: |
+        export ARTIFACT_LABEL=$TAG
         python -m sphinx docs/ docs/_build/ -b html
 
     - name: Upload artifacts
