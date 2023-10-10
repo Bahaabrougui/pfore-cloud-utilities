@@ -15,12 +15,12 @@ project = config['project']['name']
 copyright = f'2023-{date.today().year} lidl e-commerce'
 author = ', '.join(author['name'] for author in config['project']['authors'])
 version = os.environ.get('ARTIFACT_LABEL', audeer.git_repo_version())
-print(version)
-print(os.environ.get('ARTIFACT_LABEL'))
-print(audeer.git_repo_tags()[-1])
+v = version
+vv = os.environ.get('ARTIFACT_LABEL')
+w = audeer.git_repo_tags()[-1]
 import git
-print(git.Git().tag().split('\n')[-1])
-raise ValueError()
+ww = git.Git().tag().split('\n')[-1]
+raise ValueError(v, vv, w, ww)
 title = 'Documentation'
 
 
