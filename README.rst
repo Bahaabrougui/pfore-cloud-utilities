@@ -8,9 +8,9 @@ pfore-cloud-utilities
 cloud utility functions.
 
 
-.. |docs| image:: https://img.shields.io/badge/docs-v0.0.1-blue
+.. |docs| image:: https://img.shields.io/pypi/v/pfore-cloud-utilities?label=docs
     :target: https://bahaabrougui.github.io/pfore-cloud-utilities/
     :alt: pfore-cloud-utilities documentation
-.. |python-versions| image:: https://img.shields.io/badge/python-3.9%20_%7C%203.10_%20%7C%203.11-blue
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/pfore-cloud-utilities.svg
     :target: https://pypi.org/project/pfore-cloud-utilities/
     :alt: pfore-cloud-utilities supported Python versions
