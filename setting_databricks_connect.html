@@ -39,7 +39,7 @@
             pfore-cloud-utilities
           </a>
               <div class="version">
-                v0.0.0-dev2
+                v0898dad
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -95,9 +95,10 @@
   <section id="setting-up-databricks-connect">
 <h1>Setting up databricks-connect<a class="headerlink" href="#setting-up-databricks-connect" title="Link to this heading"></a></h1>
 <p>To run code remotely on a databricks cluster, we’ll use <a class="reference external" href="https://learn.microsoft.com/en-us/azure/databricks/dev-tools/databricks-connect-legacy">databricks-connect</a>
-package. Note that development on clusters of versions <cite>13.0</cite> is not yet
-supported due to the unavailability of <a class="reference external" href="https://www.databricks.com/product/unity-catalog">Unity Catalog</a> within the schwarz
-universe. This guide will cover clusters of versions <cite>12.*</cite>.</p>
+package.</p>
+<p>It is important to note that development on clusters of versions <cite>13.0</cite> requires
+<a class="reference external" href="https://www.databricks.com/product/unity-catalog">Unity Catalog</a>. This guide will cover legacy workspaces, on which
+<a class="reference external" href="https://www.databricks.com/product/unity-catalog">Unity Catalog</a> is not activated, therefore only clusters of versions <cite>12.*</cite>.</p>
 <p>The first step would be to create a <code class="file docutils literal notranslate"><span class="pre">databricks-connect</span></code> file under your
 home directory. The file will have the following structure:</p>
 <div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="na">{</span>
@@ -111,7 +112,7 @@ home directory. The file will have the following structure:</p>
 </div>
 <p>Both <cite>cluster_id</cite> and <cite>org_id</cite> can be fetched from the cluster url. When you
 click on a cluster from the databricks UI, the url will look like:
-<code class="file docutils literal notranslate"><span class="pre">https://&lt;host&gt;/?o=637714045082932#setting/clusters/0926-150153-dz1yndfb/</span></code>
+<code class="file docutils literal notranslate"><span class="pre">https://&lt;host&gt;/?o=&lt;org-id&gt;#setting/clusters/&lt;cluster-id&gt;/</span></code>
 where the string after <strong>?o=</strong> is the <strong>org_id</strong> and the string
 after <strong>/clusters/</strong> is the <strong>cluster_id</strong>.</p>
 <p>Once the file is set up, you’ll have to create a virtual env with a python

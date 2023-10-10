@@ -2,9 +2,11 @@ Setting up databricks-connect
 =============================
 
 To run code remotely on a databricks cluster, we'll use databricks-connect_
-package. Note that development on clusters of versions `13.0` is not yet
-supported due to the unavailability of `Unity Catalog`_ within the schwarz
-universe. This guide will cover clusters of versions `12.*`.
+package.
+
+It is important to note that development on clusters of versions `13.0` requires
+`Unity Catalog`_. This guide will cover legacy workspaces, on which
+`Unity Catalog`_ is not activated, therefore only clusters of versions `12.*`.
 
 The first step would be to create a :file:`databricks-connect` file under your
 home directory. The file will have the following structure:
@@ -21,7 +23,7 @@ home directory. The file will have the following structure:
 
 Both `cluster_id` and `org_id` can be fetched from the cluster url. When you
 click on a cluster from the databricks UI, the url will look like:
-:file:`https://<host>/?o=637714045082932#setting/clusters/0926-150153-dz1yndfb/`
+:file:`https://<host>/?o=<org-id>#setting/clusters/<cluster-id>/`
 where the string after **?o=** is the **org_id** and the string
 after **/clusters/** is the **cluster_id**.
 
