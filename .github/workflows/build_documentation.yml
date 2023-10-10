@@ -13,21 +13,20 @@ jobs:
       with:
         python-version: '3.9'
 
+    - name: Get latest tag's name to use for version
+      id: get_tag
+      run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+
     - name: Install doc dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r docs/requirements.txt
 
-    - name: Get latest tag's name to use for version
-      id: get_tag
-      run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
-
     - name: Build documentation
       env:
-        TAG: ${{ steps.get_tag.outputs.TAG }}
+        ARTIFACT_LABEL: ${{ steps.get_tag.outputs.TAG }}
       run: |
-        export ARTIFACT_LABEL=$TAG
         python -m sphinx docs/ docs/_build/ -b html
 
     - name: Upload artifacts
