@@ -1,15 +1,12 @@
-from pfore_cloud_utilities.core.azure_blob_connector import (
-    AzureBlobConnector
-)
 from pfore_cloud_utilities.core.azure_aad_token_generator import (
-    AADTokenGenerator
+    AADTokenGenerator,
 )
+from pfore_cloud_utilities.core.azure_blob_connector import AzureBlobConnector
+from pfore_cloud_utilities.core.databricks_workspace import DatabricksWorkspace
 from pfore_cloud_utilities.core.databricks_workspace import (
-    DatabricksWorkspace
+    get_workspace_secret_value,
 )
-from pfore_cloud_utilities.core.databricks_workspace import (
-    get_workspace_secret_value
-)
+
 
 try:
     # Dynamically get the version of the installed module

@@ -1,6 +1,6 @@
-import os
 import base64
 import configparser
+import os
 
 from databricks.sdk import WorkspaceClient
 
@@ -9,10 +9,10 @@ from .singleton import Singleton
 
 class DatabricksWorkspace(metaclass=Singleton):
     """Helper class to interact with a Databricks workspace.
-    
+
     The class requires that at least a databricks configuration profile is set
     which is assumed to be located under `~/.databrickscfg`.
-    
+
     This class can be extended to use `DBFS`,
     `secrets`, `jobs` and `libraries` APIs.
 
@@ -41,15 +41,17 @@ def get_workspace_secret_value(
     workspace: str,
     scope: str,
 ) -> str:
-    """Returns a value of a Databricks workspace secret which scope
-    mirrors an Azure KV.
-    
+    """Returns a value of a Databricks workspace secret.
+
+    Databricks secrets support multiple back-ends and the scope can
+    mirror an Azure KV for example.
+
     Note that `get_secret()` returns the bytes representation of the secret,
     which has to be decoded using `base64` package.
-    
+
     The method uses :class:`DatabricksWorkspace` which requires
     the `.databrickscfg` file to exist under your home directory.
-    
+
     Args:
         secret_key: Secret's key
         workspace: Workspace name, matches config file profile name
@@ -60,9 +62,8 @@ def get_workspace_secret_value(
 
     Raises:
         FileNotFoundError: If `~/.databrickscfg` config file is not found
-    
-    """
 
+    """
     return base64.b64decode(
         DatabricksWorkspace().workspacesClients[workspace].secrets.get_secret(
             key=secret_key, scope=scope

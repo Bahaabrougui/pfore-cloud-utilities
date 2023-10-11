@@ -41,7 +41,7 @@ major's matches the cluster version so `12.*.*`.
     # Symlink pyenv env to a desired repo for easier access
     ln -s ${HOME}/.pyenv/versions/databricks12 <path-to-your-desired-dir>
 
-    # Activate virutal env
+    # Activate virtual env
     source <path-to-your-desired-dir>/databricks12/bin/activate
 
     # Install databricks-connect

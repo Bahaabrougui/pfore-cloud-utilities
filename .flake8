@@ -1,9 +1,9 @@
 [flake8]
 exclude =
     .eggs,
-    build,
+    docs/_build,
 extend-ignore =
-    # math, https://github.com/PyCQA/pycodestyle/issues/513
+    # breaking binary operators, https://github.com/PyCQA/pycodestyle/issues/513
     W503,
 per-file-ignores =
     # ignore unused imports

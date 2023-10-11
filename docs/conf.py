@@ -2,9 +2,8 @@ from datetime import date
 import os
 import shutil
 
-import toml
-
 import audeer
+import toml
 
 
 config = toml.load('../pyproject.toml')
@@ -13,7 +12,11 @@ config = toml.load('../pyproject.toml')
 # Project -----------------------------------------------------------------
 project = config['project']['name']
 copyright = f'2023-{date.today().year} lidl e-commerce'
-author = ', '.join(author['name'] for author in config['project']['authors'])
+author = ', '.join(
+    author['name']
+    for author in config['project']['authors']
+    if 'name' in author.keys()
+)
 version = os.environ.get('ARTIFACT_LABEL', audeer.git_repo_version())
 title = 'Documentation'
 

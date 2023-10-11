@@ -1,6 +1,7 @@
 import datetime
 
-from azure.identity import DefaultAzureCredential, ClientSecretCredential
+from azure.identity import ClientSecretCredential
+from azure.identity import DefaultAzureCredential
 
 from .define import AAD_RESOURCE_NAME_TO_ID
 from .singleton import Singleton
@@ -39,7 +40,9 @@ class AADTokenGenerator(metaclass=Singleton):
         self._token = dict()
 
     def get_token(self, aad_resource_name: str) -> str:
-        """Helper method that uses `_credentials` variables
+        """Generates AAD token.
+
+        Helper method that uses `_credentials` variables
         to make calls to the AAD API to generate token
         using Managed Identities or SPNs based connection.
 
@@ -60,7 +63,7 @@ class AADTokenGenerator(metaclass=Singleton):
             )
 
         # AAD token is only valid for 1 hour
-        if not (aad_resource_name in self._token.keys()) or (
+        if aad_resource_name not in self._token.keys() or (
             (datetime.datetime.now() -
              self._token[aad_resource_name]['date']).seconds // 60 >= 58
         ):

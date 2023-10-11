@@ -1,15 +1,18 @@
 import io
 
-from azure.identity import DefaultAzureCredential, ClientSecretCredential
-from azure.storage.blob import BlobServiceClient, BlobClient
 from azure.core.exceptions import ResourceExistsError
+from azure.identity import ClientSecretCredential
+from azure.identity import DefaultAzureCredential
+from azure.storage.blob import BlobClient
+from azure.storage.blob import BlobServiceClient
 
 from .singleton import Singleton
 
 
 class AzureBlobConnector(metaclass=Singleton):
-    """Singleton class to handle connection, reads and writes inside an Azure
-    Blob Storage container.
+    """Singleton class to interact with an Azure Blob Storage container.
+
+    The classes handles connection, reads and writes inside the container.
 
     Connection is created using either a managed identity or an SPN.
 
@@ -66,7 +69,7 @@ class AzureBlobConnector(metaclass=Singleton):
             container_name: str,
             path: str,
     ) -> bytes:
-        """Downloads content from blob storage
+        """Downloads content from blob storage.
 
         Args:
             container_name: Name of the blob container
@@ -84,7 +87,8 @@ class AzureBlobConnector(metaclass=Singleton):
             return bytes_io_obj.read()
 
     def _get_blob_client(self, container_name: str, file: str) -> BlobClient:
-        """Gets blob client to interact with blob inside a container.
+        """Returns blob client to interact with blob inside a container.
+
         If the specified container's name doesn't exist, it is first created.
 
         Args:
