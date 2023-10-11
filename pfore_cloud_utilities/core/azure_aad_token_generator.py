@@ -54,7 +54,8 @@ class AADTokenGenerator(metaclass=Singleton):
 
         Raises:
             NotImplementedError: If the specified `aad_resource_name`
-            does not exist in `AAD_RESOURCE_NAME_TO_ID`, defined in `define.py`
+                does not exist in `AAD_RESOURCE_NAME_TO_ID`,
+                defined in `define.py`
 
         """
         if aad_resource_name not in AAD_RESOURCE_NAME_TO_ID.keys():
