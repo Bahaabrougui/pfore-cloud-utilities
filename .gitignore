@@ -6,3 +6,4 @@ __pycache__
 .eggs/
 docs/_build/
 docs/api/
+__init__.pyc
