@@ -5,7 +5,8 @@ class Singleton(type):
         """Instantiates class only once during runtime, follows Singleton DP.
 
         If at least one class attribute value is different from the one
-        specified in the previous instantiation call, a new instance is created.
+        specified in the previous instantiation call,
+        a new instance is created.
 
         """
         if cls in cls._instances:
