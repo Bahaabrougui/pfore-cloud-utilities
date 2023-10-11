@@ -2,9 +2,8 @@ from datetime import date
 import os
 import shutil
 
-import toml
-
 import audeer
+import toml
 
 
 config = toml.load('../pyproject.toml')

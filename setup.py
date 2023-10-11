@@ -2,6 +2,7 @@ import os
 
 from setuptools import setup
 
+
 # If build workflow is triggered from ADO or it's a pre-release,
 # ARTIFACT_LABEL exists
 try:
