@@ -4,9 +4,9 @@ Authentication
 :class:`pfore_cloud_utilities.AADTokenGenerator` and
 :class:`pfore_cloud_utilities.AzureBlobConnector` requires authentication
 to function properly. The authentication can be done either using
-a managed identity (case you're running the package form an AKS cluster
-or whatever resource that supports Azure Managed Identities), or can be done
-using Service Principals. Authentication using personal account
+a managed identity (case you're running the package form an Azure Kubernetes
+cluster or whatever resource that supports Azure Managed Identities),
+or can be done using Service Principals. Authentication using personal account
 isn't recommended for security purposes and therefore wasn't implemented.
 
 To authenticate with a Managed Identity, simply call the class and its methods,

@@ -90,9 +90,9 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pfore_cloud_utilities.core.databricks_workspace</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">base64</span>
+<span></span><span class="kn">import</span> <span class="nn">base64</span>
 <span class="kn">import</span> <span class="nn">configparser</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">databricks.sdk</span> <span class="kn">import</span> <span class="n">WorkspaceClient</span>
 
@@ -103,10 +103,10 @@
 <a class="viewcode-back" href="../../../api/pfore_cloud_utilities.DatabricksWorkspace.html#pfore_cloud_utilities.DatabricksWorkspace">[docs]</a>
 <span class="k">class</span> <span class="nc">DatabricksWorkspace</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">Singleton</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper class to interact with a Databricks workspace.</span>
-<span class="sd">    </span>
+
 <span class="sd">    The class requires that at least a databricks configuration profile is set</span>
 <span class="sd">    which is assumed to be located under `~/.databrickscfg`.</span>
-<span class="sd">    </span>
+
 <span class="sd">    This class can be extended to use `DBFS`,</span>
 <span class="sd">    `secrets`, `jobs` and `libraries` APIs.</span>
 
@@ -138,15 +138,17 @@
     <span class="n">workspace</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a value of a Databricks workspace secret which scope</span>
-<span class="sd">    mirrors an Azure KV.</span>
-<span class="sd">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a value of a Databricks workspace secret.</span>
+
+<span class="sd">    Databricks secrets support multiple back-ends and the scope can</span>
+<span class="sd">    mirror an Azure KV for example.</span>
+
 <span class="sd">    Note that `get_secret()` returns the bytes representation of the secret,</span>
 <span class="sd">    which has to be decoded using `base64` package.</span>
-<span class="sd">    </span>
+
 <span class="sd">    The method uses :class:`DatabricksWorkspace` which requires</span>
 <span class="sd">    the `.databrickscfg` file to exist under your home directory.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        secret_key: Secret&#39;s key</span>
 <span class="sd">        workspace: Workspace name, matches config file profile name</span>
@@ -157,9 +159,8 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        FileNotFoundError: If `~/.databrickscfg` config file is not found</span>
-<span class="sd">    </span>
-<span class="sd">    &quot;&quot;&quot;</span>
 
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span>
         <span class="n">DatabricksWorkspace</span><span class="p">()</span><span class="o">.</span><span class="n">workspacesClients</span><span class="p">[</span><span class="n">workspace</span><span class="p">]</span><span class="o">.</span><span class="n">secrets</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span>
             <span class="n">key</span><span class="o">=</span><span class="n">secret_key</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">scope</span>

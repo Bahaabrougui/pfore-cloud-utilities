@@ -92,7 +92,8 @@
   <h1>Source code for pfore_cloud_utilities.core.azure_aad_token_generator</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">datetime</span>
 
-<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span><span class="p">,</span> <span class="n">ClientSecretCredential</span>
+<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">ClientSecretCredential</span>
+<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span>
 
 <span class="kn">from</span> <span class="nn">.define</span> <span class="kn">import</span> <span class="n">AAD_RESOURCE_NAME_TO_ID</span>
 <span class="kn">from</span> <span class="nn">.singleton</span> <span class="kn">import</span> <span class="n">Singleton</span>
@@ -135,7 +136,9 @@
 <div class="viewcode-block" id="AADTokenGenerator.get_token">
 <a class="viewcode-back" href="../../../api/pfore_cloud_utilities.AADTokenGenerator.html#pfore_cloud_utilities.AADTokenGenerator.get_token">[docs]</a>
     <span class="k">def</span> <span class="nf">get_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aad_resource_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper method that uses `_credentials` variables</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates AAD token.</span>
+
+<span class="sd">        Helper method that uses `_credentials` variables</span>
 <span class="sd">        to make calls to the AAD API to generate token</span>
 <span class="sd">        using Managed Identities or SPNs based connection.</span>
 
@@ -156,7 +159,7 @@
             <span class="p">)</span>
 
         <span class="c1"># AAD token is only valid for 1 hour</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">aad_resource_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="k">if</span> <span class="n">aad_resource_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="p">(</span>
             <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span>
              <span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">[</span><span class="n">aad_resource_name</span><span class="p">][</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">seconds</span> <span class="o">//</span> <span class="mi">60</span> <span class="o">&gt;=</span> <span class="mi">58</span>
         <span class="p">):</span>

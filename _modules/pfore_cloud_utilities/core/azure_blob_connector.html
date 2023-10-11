@@ -92,9 +92,11 @@
   <h1>Source code for pfore_cloud_utilities.core.azure_blob_connector</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">io</span>
 
-<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span><span class="p">,</span> <span class="n">ClientSecretCredential</span>
-<span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobServiceClient</span><span class="p">,</span> <span class="n">BlobClient</span>
 <span class="kn">from</span> <span class="nn">azure.core.exceptions</span> <span class="kn">import</span> <span class="n">ResourceExistsError</span>
+<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">ClientSecretCredential</span>
+<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span>
+<span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobClient</span>
+<span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobServiceClient</span>
 
 <span class="kn">from</span> <span class="nn">.singleton</span> <span class="kn">import</span> <span class="n">Singleton</span>
 
@@ -102,8 +104,9 @@
 <div class="viewcode-block" id="AzureBlobConnector">
 <a class="viewcode-back" href="../../../api/pfore_cloud_utilities.AzureBlobConnector.html#pfore_cloud_utilities.AzureBlobConnector">[docs]</a>
 <span class="k">class</span> <span class="nc">AzureBlobConnector</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">Singleton</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Singleton class to handle connection, reads and writes inside an Azure</span>
-<span class="sd">    Blob Storage container.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Singleton class to interact with an Azure Blob Storage container.</span>
+
+<span class="sd">    The classes handles connection, reads and writes inside the container.</span>
 
 <span class="sd">    Connection is created using either a managed identity or an SPN.</span>
 
@@ -165,7 +168,7 @@
             <span class="n">container_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Downloads content from blob storage</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Downloads content from blob storage.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            container_name: Name of the blob container</span>
@@ -184,7 +187,8 @@
 
 
     <span class="k">def</span> <span class="nf">_get_blob_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">container_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlobClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets blob client to interact with blob inside a container.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns blob client to interact with blob inside a container.</span>
+
 <span class="sd">        If the specified container&#39;s name doesn&#39;t exist, it is first created.</span>
 
 <span class="sd">        Args:</span>

@@ -108,8 +108,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pfore_cloud_utilities.AzureBlobConnector">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pfore_cloud_utilities.</span></span><span class="sig-name descname"><span class="pre">AzureBlobConnector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azure_tenant_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_client_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_client_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfore_cloud_utilities/core/azure_blob_connector.html#AzureBlobConnector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfore_cloud_utilities.AzureBlobConnector" title="Link to this definition"></a></dt>
-<dd><p>Singleton class to handle connection, reads and writes inside an Azure
-Blob Storage container.</p>
+<dd><p>Singleton class to interact with an Azure Blob Storage container.</p>
+<p>The classes handles connection, reads and writes inside the container.</p>
 <p>Connection is created using either a managed identity or an SPN.</p>
 <p>Upon instantiation, if spn_client_id or spn_client_secret are set to None,
 the client will assume Managed Identity as an authentication method.</p>
@@ -130,7 +130,7 @@ the client will assume Managed Identity as an authentication method.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pfore_cloud_utilities.AzureBlobConnector.download">
 <span class="sig-prename descclassname"><span class="pre">AzureBlobConnector.</span></span><span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pfore_cloud_utilities/core/azure_blob_connector.html#AzureBlobConnector.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pfore_cloud_utilities.AzureBlobConnector.download" title="Link to this definition"></a></dt>
-<dd><p>Downloads content from blob storage</p>
+<dd><p>Downloads content from blob storage.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
