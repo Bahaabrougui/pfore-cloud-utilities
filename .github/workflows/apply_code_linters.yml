@@ -1,4 +1,4 @@
-name: Linter
+name: Apply code linters
 
 on:
   push:
