@@ -36,7 +36,7 @@
             pfore-cloud-utilities
           </a>
               <div class="version">
-                v0.0.0-dev2
+                v0.0.0-dev3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -104,28 +104,40 @@
 <span class="k">class</span> <span class="nc">AADTokenGenerator</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">Singleton</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Singleton class to handle AAD token generation of AAD resources.</span>
 
-<span class="sd">    Connection is created using either a managed identity or an SPN.</span>
+<span class="sd">    Connection is created using either a Managed Identity or an SPN.</span>
 
-<span class="sd">    If spn_client_id or spn_client_secret are set to None, the client</span>
-<span class="sd">    will assume Managed Identity as an authentication method.</span>
+<span class="sd">    If azure_tenant_id, spn_client_id and spn_client_secret</span>
+<span class="sd">    are all set to None, the client will assume Managed Identity</span>
+<span class="sd">    as an authentication method.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        azure_tenant_id: Azure tenant ID, required</span>
+<span class="sd">        azure_tenant_id: Azure tenant ID</span>
 <span class="sd">        spn_client_id: Service Principal client ID</span>
 <span class="sd">        spn_client_secret: Service Principal client secret</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If one of the arguments for SPN-based auth is missing</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">azure_tenant_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">azure_tenant_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">spn_client_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">spn_client_secret</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="k">if</span> <span class="n">spn_client_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">spn_client_secret</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">spn_client_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">spn_client_secret</span> <span class="ow">is</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="n">azure_tenant_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span> <span class="o">=</span> <span class="n">DefaultAzureCredential</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="p">(</span><span class="n">azure_tenant_id</span><span class="p">,</span> <span class="n">spn_client_secret</span><span class="p">,</span> <span class="n">spn_client_secret</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s1">&#39;One of the required arguments for SPN-based &#39;</span>
+                    <span class="s1">&#39;authentication is not specified. Please either &#39;</span>
+                    <span class="s1">&#39;specify all required arguments for SPN-based auth, &#39;</span>
+                    <span class="s1">&#39;or don</span><span class="se">\&#39;</span><span class="s1">t specify any argument at all for MI-based auth.&#39;</span>
+                <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span> <span class="o">=</span> <span class="n">ClientSecretCredential</span><span class="p">(</span>
                 <span class="n">tenant_id</span><span class="o">=</span><span class="n">azure_tenant_id</span><span class="p">,</span>
                 <span class="n">client_id</span><span class="o">=</span><span class="n">spn_client_id</span><span class="p">,</span>
