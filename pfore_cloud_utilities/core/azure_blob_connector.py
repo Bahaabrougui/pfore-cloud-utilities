@@ -12,12 +12,12 @@ from .singleton import Singleton
 class AzureBlobConnector(metaclass=Singleton):
     """Singleton class to interact with an Azure Blob Storage container.
 
-    The classes handles connection, reads and writes inside the container.
+    The classes handle connection, reads and writes inside the container.
 
-    Connection is created using either a managed identity or an SPN.
+    Connection is created using either a Managed Identity or an SPN.
 
-    Upon instantiation, if azure_tenant_id, spn_client_id or spn_client_secret
-    is set to None, the client will assume Managed Identity
+    Upon instantiation, if azure_tenant_id, spn_client_id and spn_client_secret
+    are all set to None, the client will assume Managed Identity
     as an authentication method.
 
     Args:
@@ -25,6 +25,9 @@ class AzureBlobConnector(metaclass=Singleton):
         azure_tenant_id: Azure tenant ID
         spn_client_id: Service Principal client ID
         spn_client_secret: Service Principal client secret
+
+    Raises:
+        ValueError: If one of the arguments for SPN-based auth is missing
 
     """
     def __init__(
@@ -38,10 +41,18 @@ class AzureBlobConnector(metaclass=Singleton):
         # account_url is saved as class attribute to be used for comparison
         # during class instance creation
         self._account_url = account_url
-        if (spn_client_id is None or spn_client_secret is None
-                or azure_tenant_id is None):
+
+        if (spn_client_id is None and spn_client_secret is None
+                and azure_tenant_id is None):
             credentials = DefaultAzureCredential()
         else:
+            if None in (azure_tenant_id, spn_client_secret, spn_client_secret):
+                raise ValueError(
+                    'One of the required arguments for SPN-based '
+                    'authentication is not specified. Please either '
+                    'specify all required arguments for SPN-based auth, '
+                    'or don\'t specify any argument at all for MI-based auth.'
+                )
             credentials = ClientSecretCredential(
                 tenant_id=azure_tenant_id,
                 client_id=spn_client_id,
