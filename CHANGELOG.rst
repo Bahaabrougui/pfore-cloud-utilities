@@ -8,6 +8,13 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.0.0-dev3 (2023-10-12)
+-------------------------------
+
+* Changed: Authentication to AAD resources
+* Changed: Documentation and Metadata
+
+
 Version 0.0.0-dev2 (2023-10-09)
 -------------------------------
 
