@@ -12,11 +12,12 @@ class AADTokenGenerator(metaclass=Singleton):
 
     Connection is created using either a managed identity or an SPN.
 
-    If spn_client_id or spn_client_secret are set to None, the client
-    will assume Managed Identity as an authentication method.
+    If azure_tenant_id, spn_client_id or spn_client_secret
+    is set to None, the client will assume Managed Identity
+    as an authentication method.
 
     Args:
-        azure_tenant_id: Azure tenant ID, required
+        azure_tenant_id: Azure tenant ID
         spn_client_id: Service Principal client ID
         spn_client_secret: Service Principal client secret
 
@@ -24,12 +25,13 @@ class AADTokenGenerator(metaclass=Singleton):
 
     def __init__(
             self,
-            azure_tenant_id: str,
+            azure_tenant_id: str = None,
             spn_client_id: str = None,
             spn_client_secret: str = None,
             ) -> None:
 
-        if spn_client_id is None or spn_client_secret is None:
+        if (spn_client_id is None or spn_client_secret is None
+                or azure_tenant_id is None):
             self._credentials = DefaultAzureCredential()
         else:
             self._credentials = ClientSecretCredential(

@@ -16,12 +16,13 @@ class AzureBlobConnector(metaclass=Singleton):
 
     Connection is created using either a managed identity or an SPN.
 
-    Upon instantiation, if spn_client_id or spn_client_secret are set to None,
-    the client will assume Managed Identity as an authentication method.
+    Upon instantiation, if azure_tenant_id, spn_client_id or spn_client_secret
+    is set to None, the client will assume Managed Identity
+    as an authentication method.
 
     Args:
         account_url: Storage Account url, required
-        azure_tenant_id: Azure tenant ID, required
+        azure_tenant_id: Azure tenant ID
         spn_client_id: Service Principal client ID
         spn_client_secret: Service Principal client secret
 
@@ -29,7 +30,7 @@ class AzureBlobConnector(metaclass=Singleton):
     def __init__(
             self,
             account_url: str,
-            azure_tenant_id: str,
+            azure_tenant_id: str = None,
             spn_client_id: str = None,
             spn_client_secret: str = None,
             ) -> None:
@@ -37,7 +38,8 @@ class AzureBlobConnector(metaclass=Singleton):
         # account_url is saved as class attribute to be used for comparison
         # during class instance creation
         self._account_url = account_url
-        if spn_client_id is None or spn_client_secret is None:
+        if (spn_client_id is None or spn_client_secret is None
+                or azure_tenant_id is None):
             credentials = DefaultAzureCredential()
         else:
             credentials = ClientSecretCredential(
